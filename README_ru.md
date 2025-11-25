@@ -2,12 +2,11 @@
 
 ## Что это
 
-// <editor-fold desc="Fields and tools">
-
 Общеприменимые исключения.  
 В данный модуль входят следующие классы исключений:
 
 - [`BadRequestException`](src/main/java/ru/spb/tksoft/common/exception/BadRequestException.java)
+- [`RequestFailedException`](src/main/java/ru/spb/tksoft/common/exception/RequestFailedException.java)
 - [`ConfigurationMismatchException`](src/main/java/ru/spb/tksoft/common/exception/ConfigurationMismatchException.java)
 - [`ConversionFailedException`](src/main/java/ru/spb/tksoft/common/exception/ConversionFailedException.java)
 - [`DuplicateObjectException`](src/main/java/ru/spb/tksoft/common/exception/DuplicateObjectException.java)
@@ -16,8 +15,6 @@
 - [`ObjectNotFoundException`](src/main/java/ru/spb/tksoft/common/exception/ObjectNotFoundException.java)
 - [`UserNotFoundException`](src/main/java/ru/spb/tksoft/common/exception/UserNotFoundException.java)
 - [`TkBaseException`](src/main/java/ru/spb/tksoft/common/exception/TkBaseException.java)
-
-// </editor-fold>
 
 ## Быстрый старт
 

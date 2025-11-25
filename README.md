@@ -6,6 +6,7 @@ Common exceptions.
 This module includes the following exception classes:
 
 - [`BadRequestException`](src/main/java/ru/spb/tksoft/common/exception/BadRequestException.java)
+- [`RequestFailedException`](src/main/java/ru/spb/tksoft/common/exception/RequestFailedException.java)
 - [`ConfigurationMismatchException`](src/main/java/ru/spb/tksoft/common/exception/ConfigurationMismatchException.java)
 - [`ConversionFailedException`](src/main/java/ru/spb/tksoft/common/exception/ConversionFailedException.java)
 - [`DuplicateObjectException`](src/main/java/ru/spb/tksoft/common/exception/DuplicateObjectException.java)
