@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for TkBaseException.
@@ -48,9 +47,9 @@ class TkBaseExceptionTest {
         TestException exception = new TestException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(9999);
-        assertThat(exception.getMessage()).isEqualTo("Test exception");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -62,9 +61,10 @@ class TkBaseExceptionTest {
         TestException exception = new TestException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(9999);
-        assertThat(exception.getMessage()).isEqualTo("Test exception: Additional details");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Test exception: Additional details");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -73,7 +73,7 @@ class TkBaseExceptionTest {
         TestException exception = new TestException();
 
         // Then
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 }
 

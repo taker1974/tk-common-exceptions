@@ -14,26 +14,31 @@
 
 package ru.spb.tksoft.common.exception;
 
+import java.util.Objects;
+import lombok.Getter;
+
 /**
- * Bad request: client call us with invalid data.
+ * Feign client exception.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class BadRequestException extends TkBaseException {
+public class FeignClientException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 400;
+    public static final int CODE = 8943;
 
     /** Error message. */
-    public static final String MESSAGE = "Bad request";
+    public static final String MESSAGE = "Feign client failed";
 
-    /**
-     * Default constructor.
-     * 
-     */
-    public BadRequestException() {
+    /** Status code. */
+    @Getter
+    private final int statusCode;
+
+    /** Default constructor. */
+    public FeignClientException() {
 
         super(CODE, MESSAGE);
+        this.statusCode = 0;
     }
 
     /**
@@ -41,8 +46,10 @@ public class BadRequestException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public BadRequestException(String subMessage) {
+    public FeignClientException(String subMessage, int statusCode) {
 
-        super(CODE, MESSAGE + ": " + subMessage);
+        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        this.statusCode = statusCode;
     }
 }
+

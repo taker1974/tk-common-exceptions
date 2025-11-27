@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for ConversionFailedException.
@@ -31,9 +30,9 @@ class ConversionFailedExceptionTest {
         ConversionFailedException exception = new ConversionFailedException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(ConversionFailedException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ConversionFailedException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,17 +44,17 @@ class ConversionFailedExceptionTest {
         ConversionFailedException exception = new ConversionFailedException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
-        assertThat(exception.getMessage())
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
+        Assertions.assertThat(exception.getMessage())
                 .isEqualTo("Conversion failed: String to Integer conversion failed");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(ConversionFailedException.CODE).isEqualTo(893);
-        assertThat(ConversionFailedException.MESSAGE).isEqualTo("Conversion failed");
+        Assertions.assertThat(ConversionFailedException.CODE).isEqualTo(893);
+        Assertions.assertThat(ConversionFailedException.MESSAGE).isEqualTo("Conversion failed");
     }
 }
 

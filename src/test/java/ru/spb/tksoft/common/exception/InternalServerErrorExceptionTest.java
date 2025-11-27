@@ -18,43 +18,43 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for BadRequestException.
+ * Tests for InternalServerErrorException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class BadRequestExceptionTest {
+class InternalServerErrorExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        BadRequestException exception = new BadRequestException();
+        InternalServerErrorException exception = new InternalServerErrorException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(BadRequestException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(InternalServerErrorException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Invalid parameter value";
+        String subMessage = "Database connection failed";
 
         // When
-        BadRequestException exception = new BadRequestException(subMessage);
+        InternalServerErrorException exception = new InternalServerErrorException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Bad request: Invalid parameter value");
+                .isEqualTo("Internal server error: Database connection failed");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(BadRequestException.CODE).isEqualTo(400);
-        Assertions.assertThat(BadRequestException.MESSAGE).isEqualTo("Bad request");
+        Assertions.assertThat(InternalServerErrorException.CODE).isEqualTo(500);
+        Assertions.assertThat(InternalServerErrorException.MESSAGE).isEqualTo("Internal server error");
     }
 }
 

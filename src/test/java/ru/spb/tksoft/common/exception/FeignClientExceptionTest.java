@@ -18,36 +18,35 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for ConfigurationMismatchException.
+ * Tests for FeignClientException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class ConfigurationMismatchExceptionTest {
+class FeignClientExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        ConfigurationMismatchException exception = new ConfigurationMismatchException();
+        FeignClientException exception = new FeignClientException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
-        Assertions.assertThat(exception.getMessage())
-                .isEqualTo(ConfigurationMismatchException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(FeignClientException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Database URL mismatch";
+        String subMessage = "Connection timeout";
 
         // When
-        ConfigurationMismatchException exception = new ConfigurationMismatchException(subMessage);
+        FeignClientException exception = new FeignClientException(subMessage, 500);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Configuration mismatch: Database URL mismatch");
+                .isEqualTo("Feign client failed: Connection timeout");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -57,20 +56,19 @@ class ConfigurationMismatchExceptionTest {
         String subMessage = null;
 
         // When
-        ConfigurationMismatchException exception = new ConfigurationMismatchException(subMessage);
+        FeignClientException exception = new FeignClientException(subMessage, 500);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Configuration mismatch: ");
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: ");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(ConfigurationMismatchException.CODE).isEqualTo(2583);
-        Assertions.assertThat(ConfigurationMismatchException.MESSAGE)
-                .isEqualTo("Configuration mismatch");
+        Assertions.assertThat(FeignClientException.CODE).isEqualTo(8943);
+        Assertions.assertThat(FeignClientException.MESSAGE).isEqualTo("Feign client failed");
     }
 }
 

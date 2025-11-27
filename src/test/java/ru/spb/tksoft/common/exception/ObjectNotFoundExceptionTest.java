@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for ObjectNotFoundException.
@@ -31,9 +30,9 @@ class ObjectNotFoundExceptionTest {
         ObjectNotFoundException exception = new ObjectNotFoundException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(ObjectNotFoundException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ObjectNotFoundException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,17 +44,17 @@ class ObjectNotFoundExceptionTest {
         ObjectNotFoundException exception = new ObjectNotFoundException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
-        assertThat(exception.getMessage())
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage())
                 .isEqualTo("Object not found: Project with id 123 not found");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);
-        assertThat(ObjectNotFoundException.MESSAGE).isEqualTo("Object not found");
+        Assertions.assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);
+        Assertions.assertThat(ObjectNotFoundException.MESSAGE).isEqualTo("Object not found");
     }
 }
 

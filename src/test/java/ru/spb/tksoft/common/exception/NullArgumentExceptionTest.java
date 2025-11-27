@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for NullArgumentException.
@@ -34,9 +33,10 @@ class NullArgumentExceptionTest {
         NullArgumentException exception = new NullArgumentException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
-        assertThat(exception.getMessage()).isEqualTo("Argument must not be null: userId parameter");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Argument must not be null: userId parameter");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -48,16 +48,16 @@ class NullArgumentExceptionTest {
         NullArgumentException exception = new NullArgumentException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
-        assertThat(exception.getMessage()).isEqualTo("Argument must not be null: ");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Argument must not be null: ");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(NullArgumentException.CODE).isEqualTo(225);
-        assertThat(NullArgumentException.MESSAGE).isEqualTo("Argument must not be null");
+        Assertions.assertThat(NullArgumentException.CODE).isEqualTo(225);
+        Assertions.assertThat(NullArgumentException.MESSAGE).isEqualTo("Argument must not be null");
     }
 }
 

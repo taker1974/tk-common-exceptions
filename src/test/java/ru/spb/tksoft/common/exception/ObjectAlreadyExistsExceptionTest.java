@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for ObjectAlreadyExistsException.
@@ -31,9 +30,10 @@ class ObjectAlreadyExistsExceptionTest {
         ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(ObjectAlreadyExistsException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo(ObjectAlreadyExistsException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,10 +45,10 @@ class ObjectAlreadyExistsExceptionTest {
         ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        assertThat(exception.getMessage())
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getMessage())
                 .isEqualTo("Object already exists: Project with name 'TestProject' already exists");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -60,16 +60,17 @@ class ObjectAlreadyExistsExceptionTest {
         ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        assertThat(exception.getMessage()).isEqualTo("Object already exists: ");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Object already exists: ");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(ObjectAlreadyExistsException.CODE).isEqualTo(5371);
-        assertThat(ObjectAlreadyExistsException.MESSAGE).isEqualTo("Object already exists");
+        Assertions.assertThat(ObjectAlreadyExistsException.CODE).isEqualTo(5371);
+        Assertions.assertThat(ObjectAlreadyExistsException.MESSAGE)
+                .isEqualTo("Object already exists");
     }
 }
 

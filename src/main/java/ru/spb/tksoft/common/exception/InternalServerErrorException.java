@@ -15,23 +15,23 @@
 package ru.spb.tksoft.common.exception;
 
 /**
- * Bad request: client call us with invalid data.
+ * Internal server error: something went wrong on the server side.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class BadRequestException extends TkBaseException {
+public class InternalServerErrorException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 400;
+    public static final int CODE = 500;
 
     /** Error message. */
-    public static final String MESSAGE = "Bad request";
+    public static final String MESSAGE = "Internal server error";
 
     /**
      * Default constructor.
      * 
      */
-    public BadRequestException() {
+    public InternalServerErrorException() {
 
         super(CODE, MESSAGE);
     }
@@ -41,7 +41,7 @@ public class BadRequestException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public BadRequestException(String subMessage) {
+    public InternalServerErrorException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }

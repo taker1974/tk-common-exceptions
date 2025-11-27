@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for UserNotFoundException.
@@ -31,9 +30,9 @@ class UserNotFoundExceptionTest {
         UserNotFoundException exception = new UserNotFoundException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(UserNotFoundException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(UserNotFoundException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,17 +44,17 @@ class UserNotFoundExceptionTest {
         UserNotFoundException exception = new UserNotFoundException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
-        assertThat(exception.getMessage())
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage())
                 .isEqualTo("User not found: User with email 'test@example.com' not found");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(UserNotFoundException.CODE).isEqualTo(892);
-        assertThat(UserNotFoundException.MESSAGE).isEqualTo("User not found");
+        Assertions.assertThat(UserNotFoundException.CODE).isEqualTo(892);
+        Assertions.assertThat(UserNotFoundException.MESSAGE).isEqualTo("User not found");
     }
 }
 

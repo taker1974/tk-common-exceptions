@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for RequestFailedException.
@@ -31,9 +30,9 @@ class RequestFailedExceptionTest {
         RequestFailedException exception = new RequestFailedException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(RequestFailedException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(RequestFailedException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,16 +44,17 @@ class RequestFailedExceptionTest {
         RequestFailedException exception = new RequestFailedException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
-        assertThat(exception.getMessage()).isEqualTo("Request failed: External service unavailable");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Request failed: External service unavailable");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(RequestFailedException.CODE).isEqualTo(8942);
-        assertThat(RequestFailedException.MESSAGE).isEqualTo("Request failed");
+        Assertions.assertThat(RequestFailedException.CODE).isEqualTo(8942);
+        Assertions.assertThat(RequestFailedException.MESSAGE).isEqualTo("Request failed");
     }
 }
 

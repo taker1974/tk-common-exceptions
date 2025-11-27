@@ -14,9 +14,8 @@
 
 package ru.spb.tksoft.common.exception;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Tests for DuplicateObjectException.
@@ -31,9 +30,9 @@ class DuplicateObjectExceptionTest {
         DuplicateObjectException exception = new DuplicateObjectException();
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
-        assertThat(exception.getMessage()).isEqualTo(DuplicateObjectException.MESSAGE);
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(DuplicateObjectException.MESSAGE);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
@@ -45,17 +44,17 @@ class DuplicateObjectExceptionTest {
         DuplicateObjectException exception = new DuplicateObjectException(subMessage);
 
         // Then
-        assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
-        assertThat(exception.getMessage())
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getMessage())
                 .isEqualTo("Duplicate object: User with email already exists");
-        assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        assertThat(DuplicateObjectException.CODE).isEqualTo(7390);
-        assertThat(DuplicateObjectException.MESSAGE).isEqualTo("Duplicate object");
+        Assertions.assertThat(DuplicateObjectException.CODE).isEqualTo(7390);
+        Assertions.assertThat(DuplicateObjectException.MESSAGE).isEqualTo("Duplicate object");
     }
 }
 
