@@ -8,7 +8,7 @@
     <groupId>ru.spb.tksoft</groupId>
     <artifactId>tk-common-exceptions</artifactId>
     <name>tk-common-exceptions</name>
-    <version>1.0.0</version>
+    <version>2.0.5</version>
     <description>Common Exceptions from TKSoft.</description>
 
     <url>http://tksoft.spb.ru</url>
@@ -57,7 +57,7 @@
         <junit-jupiter.version>5.13.4</junit-jupiter.version>
 
         <slf4j.version>2.0.17</slf4j.version>
-        <tk-log-utils.version>2.0.2</tk-log-utils.version>
+        <tk-log-utils.version>2.0.5</tk-log-utils.version>
 
     </properties>
 
@@ -124,12 +124,46 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler.version}</version>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                        <configuration>
+                            <annotationProcessorPaths>
+                                <path>
+                                    <groupId>org.projectlombok</groupId>
+                                    <artifactId>lombok</artifactId>
+                                    <version>${lombok.version}</version>
+                                </path>
+                            </annotationProcessorPaths>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar.version}</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Automatic-Module-Name>ru.spb.tksoft.common.exception</Automatic-Module-Name>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -168,6 +202,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire.version}</version>
+                <configuration>
+                    <argLine>--add-opens
+                        ru.spb.tksoft.common.exception/ru.spb.tksoft.common.exception=ALL-UNNAMED</argLine>
+                </configuration>
             </plugin>
 
             <plugin>
