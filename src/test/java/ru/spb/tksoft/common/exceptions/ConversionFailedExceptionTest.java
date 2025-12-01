@@ -51,6 +51,36 @@ class ConversionFailedExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new NumberFormatException("Invalid number");
+
+        // When
+        ConversionFailedException exception = new ConversionFailedException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ConversionFailedException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Unsupported type");
+        String subMessage = "JSON to Object conversion failed";
+
+        // When
+        ConversionFailedException exception = new ConversionFailedException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Conversion failed: JSON to Object conversion failed");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(ConversionFailedException.CODE).isEqualTo(893);

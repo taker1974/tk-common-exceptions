@@ -44,4 +44,18 @@ public abstract class TkBaseException extends RuntimeException {
         this.code = code;
         LogEx.error(log, LogEx.me(), LogEx.EXCEPTION_THROWN, this.code, this);
     }
+
+    /**
+     * Base constructor with cause.
+     * 
+     * @param code - error code.
+     * @param message - error message.
+     * @param cause - cause of the exception.
+     */
+    protected TkBaseException(int code, String message, Throwable cause) {
+
+        super(message, cause);
+        this.code = code;
+        LogEx.error(log, LogEx.me(), LogEx.EXCEPTION_THROWN, this.code, this, cause);
+    }
 }

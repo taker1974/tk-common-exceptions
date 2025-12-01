@@ -66,6 +66,38 @@ class ConfigurationMismatchExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Invalid config value");
+
+        // When
+        ConfigurationMismatchException exception = new ConfigurationMismatchException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo(ConfigurationMismatchException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Conflicting config");
+        String subMessage = "Incompatible values";
+
+        // When
+        ConfigurationMismatchException exception =
+                new ConfigurationMismatchException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Configuration mismatch: Incompatible values");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(ConfigurationMismatchException.CODE).isEqualTo(2583);

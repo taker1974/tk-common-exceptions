@@ -54,6 +54,36 @@ class NullArgumentExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new NullPointerException("argument");
+
+        // When
+        NullArgumentException exception = new NullArgumentException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(NullArgumentException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Missing argument");
+        String subMessage = "customerId";
+
+        // When
+        NullArgumentException exception = new NullArgumentException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Argument must not be null: customerId");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(NullArgumentException.CODE).isEqualTo(225);

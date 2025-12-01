@@ -39,6 +39,14 @@ class TkBaseExceptionTest {
         TestException(String subMessage) {
             super(CODE, MESSAGE + ": " + subMessage);
         }
+
+        TestException(Throwable cause) {
+            super(CODE, MESSAGE, cause);
+        }
+
+        TestException(String subMessage, Throwable cause) {
+            super(CODE, MESSAGE + ": " + subMessage, cause);
+        }
     }
 
     @Test
@@ -74,6 +82,35 @@ class TkBaseExceptionTest {
 
         // Then
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
+    }
+
+    @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Invalid input");
+
+        // When
+        TestException exception = new TestException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("State issue");
+        String subMessage = "More details";
+
+        // When
+        TestException exception = new TestException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception: More details");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
     }
 }
 

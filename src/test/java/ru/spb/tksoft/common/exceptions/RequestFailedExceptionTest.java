@@ -51,6 +51,35 @@ class RequestFailedExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Invalid request");
+
+        // When
+        RequestFailedException exception = new RequestFailedException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(RequestFailedException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Service timeout");
+        String subMessage = "Timeout reached";
+
+        // When
+        RequestFailedException exception = new RequestFailedException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Request failed: Timeout reached");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(RequestFailedException.CODE).isEqualTo(8942);

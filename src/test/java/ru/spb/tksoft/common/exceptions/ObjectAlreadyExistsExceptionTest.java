@@ -66,6 +66,38 @@ class ObjectAlreadyExistsExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Duplicate entry");
+
+        // When
+        ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo(ObjectAlreadyExistsException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Constraint violation");
+        String subMessage = "Entity already persisted";
+
+        // When
+        ObjectAlreadyExistsException exception =
+                new ObjectAlreadyExistsException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Object already exists: Entity already persisted");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(ObjectAlreadyExistsException.CODE).isEqualTo(5371);

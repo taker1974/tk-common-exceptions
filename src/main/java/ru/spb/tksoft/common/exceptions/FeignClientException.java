@@ -51,5 +51,28 @@ public class FeignClientException extends TkBaseException {
         super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
         this.statusCode = statusCode;
     }
+
+    /**
+     * Constructor with cause.
+     * 
+     * @param cause - cause of the exception.
+     */
+    public FeignClientException(Throwable cause) {
+
+        super(CODE, MESSAGE, cause);
+        this.statusCode = 0;
+    }
+
+    /**
+     * Constructor with additional message and cause.
+     * 
+     * @param subMessage - additional message.
+     * @param cause - cause of the exception.
+     */
+    public FeignClientException(String subMessage, Throwable cause) {
+
+        super(CODE, MESSAGE + ": " + subMessage, cause);
+        this.statusCode = 0;
+    }
 }
 

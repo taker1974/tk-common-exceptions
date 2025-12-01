@@ -45,4 +45,25 @@ public class ObjectNotFoundException extends TkBaseException {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
+
+    /**
+     * Constructor with cause.
+     * 
+     * @param cause - cause of the exception.
+     */
+    public ObjectNotFoundException(Throwable cause) {
+
+        super(CODE, MESSAGE, cause);
+    }
+
+    /**
+     * Constructor with additional message and cause.
+     * 
+     * @param subMessage - additional message.
+     * @param cause - cause of the exception.
+     */
+    public ObjectNotFoundException(String subMessage, Throwable cause) {
+
+        super(CODE, MESSAGE + ": " + subMessage, cause);
+    }
 }

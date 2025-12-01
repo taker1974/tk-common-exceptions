@@ -51,6 +51,36 @@ class BadRequestExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Invalid payload");
+
+        // When
+        BadRequestException exception = new BadRequestException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(BadRequestException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Broken state");
+        String subMessage = "Payload mismatch";
+
+        // When
+        BadRequestException exception = new BadRequestException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Bad request: Payload mismatch");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(BadRequestException.CODE).isEqualTo(400);

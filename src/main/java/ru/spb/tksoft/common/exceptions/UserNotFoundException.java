@@ -45,4 +45,25 @@ public class UserNotFoundException extends TkBaseException {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
+
+    /**
+     * Constructor with cause.
+     * 
+     * @param cause - cause of the exception.
+     */
+    public UserNotFoundException(Throwable cause) {
+
+        super(CODE, MESSAGE, cause);
+    }
+
+    /**
+     * Constructor with additional message and cause.
+     * 
+     * @param subMessage - additional message.
+     * @param cause - cause of the exception.
+     */
+    public UserNotFoundException(String subMessage, Throwable cause) {
+
+        super(CODE, MESSAGE + ": " + subMessage, cause);
+    }
 }

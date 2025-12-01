@@ -65,6 +65,37 @@ class FeignClientExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Feign call failed");
+
+        // When
+        FeignClientException exception = new FeignClientException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(FeignClientException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+        Assertions.assertThat(exception.getStatusCode()).isZero();
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Feign timeout");
+        String subMessage = "Timeout";
+
+        // When
+        FeignClientException exception = new FeignClientException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: Timeout");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+        Assertions.assertThat(exception.getStatusCode()).isZero();
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(FeignClientException.CODE).isEqualTo(8943);

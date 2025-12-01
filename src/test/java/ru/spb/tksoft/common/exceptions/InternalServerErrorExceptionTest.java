@@ -52,6 +52,38 @@ class InternalServerErrorExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Invalid server state");
+
+        // When
+        InternalServerErrorException exception = new InternalServerErrorException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo(InternalServerErrorException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Thread pool exhausted");
+        String subMessage = "Worker overflow";
+
+        // When
+        InternalServerErrorException exception =
+                new InternalServerErrorException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Internal server error: Worker overflow");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(InternalServerErrorException.CODE).isEqualTo(500);

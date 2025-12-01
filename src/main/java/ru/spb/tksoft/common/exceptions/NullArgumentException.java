@@ -38,4 +38,25 @@ public class NullArgumentException extends TkBaseException {
 
         super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
     }
+
+    /**
+     * Constructor with cause.
+     * 
+     * @param cause - cause of the exception.
+     */
+    public NullArgumentException(Throwable cause) {
+
+        super(CODE, MESSAGE, cause);
+    }
+
+    /**
+     * Constructor with additional message and cause.
+     * 
+     * @param subMessage - additional message.
+     * @param cause - cause of the exception.
+     */
+    public NullArgumentException(String subMessage, Throwable cause) {
+
+        super(CODE, MESSAGE + ": " + subMessage, cause);
+    }
 }

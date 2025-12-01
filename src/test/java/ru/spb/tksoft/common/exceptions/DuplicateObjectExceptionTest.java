@@ -51,6 +51,36 @@ class DuplicateObjectExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Duplicate key");
+
+        // When
+        DuplicateObjectException exception = new DuplicateObjectException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(DuplicateObjectException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Constraint violation");
+        String subMessage = "Order already processed";
+
+        // When
+        DuplicateObjectException exception = new DuplicateObjectException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Duplicate object: Order already processed");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(DuplicateObjectException.CODE).isEqualTo(7390);

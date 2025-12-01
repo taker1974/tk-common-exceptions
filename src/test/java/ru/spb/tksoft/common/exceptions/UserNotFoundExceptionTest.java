@@ -51,6 +51,36 @@ class UserNotFoundExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Missing user");
+
+        // When
+        UserNotFoundException exception = new UserNotFoundException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(UserNotFoundException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Directory lookup failed");
+        String subMessage = "User login not found";
+
+        // When
+        UserNotFoundException exception = new UserNotFoundException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("User not found: User login not found");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(UserNotFoundException.CODE).isEqualTo(892);

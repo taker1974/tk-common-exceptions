@@ -51,6 +51,35 @@ class ObjectNotFoundExceptionTest {
     }
 
     @Test
+    void testConstructorWithCause() {
+        // Given
+        Throwable cause = new IllegalArgumentException("Missing object");
+
+        // When
+        ObjectNotFoundException exception = new ObjectNotFoundException(cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ObjectNotFoundException.MESSAGE);
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void testConstructorWithSubMessageAndCause() {
+        // Given
+        Throwable cause = new IllegalStateException("Lookup failure");
+        String subMessage = "User not found";
+
+        // When
+        ObjectNotFoundException exception = new ObjectNotFoundException(subMessage, cause);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Object not found: User not found");
+        Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
     void testConstants() {
         // Then
         Assertions.assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);

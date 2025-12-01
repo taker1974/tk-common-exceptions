@@ -47,4 +47,25 @@ public class ObjectAlreadyExistsException extends TkBaseException {
 
         super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
     }
+
+    /**
+     * Constructor with cause.
+     * 
+     * @param cause - cause of the exception.
+     */
+    public ObjectAlreadyExistsException(Throwable cause) {
+
+        super(CODE, MESSAGE, cause);
+    }
+
+    /**
+     * Constructor with additional message and cause.
+     * 
+     * @param subMessage - additional message.
+     * @param cause - cause of the exception.
+     */
+    public ObjectAlreadyExistsException(String subMessage, Throwable cause) {
+
+        super(CODE, MESSAGE + ": " + subMessage, cause);
+    }
 }
