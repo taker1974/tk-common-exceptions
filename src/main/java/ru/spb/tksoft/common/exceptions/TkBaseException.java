@@ -12,37 +12,36 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import lombok.Getter;
+import ru.spb.tksoft.utils.log.LogEx;
 
 /**
- * User not found.
+ * Base exception abstract class.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class UserNotFoundException extends TkBaseException {
+public abstract class TkBaseException extends RuntimeException {
+
+    private static final Logger log = LoggerFactory.getLogger(TkBaseException.class);
 
     /** Error code. */
-    public static final int CODE = 892;
-
-    /** Error message. */
-    public static final String MESSAGE = "User not found";
+    @Getter
+    private final int code;
 
     /**
-     * Default constructor.
+     * Base constructor.
      * 
+     * @param code - error code.
+     * @param message - error message.
      */
-    public UserNotFoundException() {
+    protected TkBaseException(int code, String message) {
 
-        super(CODE, MESSAGE);
-    }
-
-    /**
-     * Constructor with additional message.
-     * 
-     * @param subMessage - additional message.
-     */
-    public UserNotFoundException(String subMessage) {
-
-        super(CODE, MESSAGE + ": " + subMessage);
+        super(message);
+        this.code = code;
+        LogEx.error(log, LogEx.me(), LogEx.EXCEPTION_THROWN, this.code, this);
     }
 }

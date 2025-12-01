@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 /**
  * Internal server error: something went wrong on the server side.

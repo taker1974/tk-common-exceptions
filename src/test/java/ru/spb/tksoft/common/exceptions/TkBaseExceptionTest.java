@@ -12,63 +12,68 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for FeignClientException.
+ * Tests for TkBaseException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class FeignClientExceptionTest {
+class TkBaseExceptionTest {
+
+    /**
+     * Test exception for testing TkBaseException.
+     */
+    private static class TestException extends TkBaseException {
+
+        private static final int CODE = 9999;
+        private static final String MESSAGE = "Test exception";
+
+        TestException() {
+            super(CODE, MESSAGE);
+        }
+
+        TestException(String subMessage) {
+            super(CODE, MESSAGE + ": " + subMessage);
+        }
+    }
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        FeignClientException exception = new FeignClientException();
+        TestException exception = new TestException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(FeignClientException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Connection timeout";
+        String subMessage = "Additional details";
 
         // When
-        FeignClientException exception = new FeignClientException(subMessage, 500);
+        TestException exception = new TestException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Feign client failed: Connection timeout");
+                .isEqualTo("Test exception: Additional details");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
-    void testConstructorWithNullSubMessage() {
-        // Given
-        String subMessage = null;
-
-        // When
-        FeignClientException exception = new FeignClientException(subMessage, 500);
+    void testInheritance() {
+        // Given & When
+        TestException exception = new TestException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: ");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
-    }
-
-    @Test
-    void testConstants() {
-        // Then
-        Assertions.assertThat(FeignClientException.CODE).isEqualTo(8943);
-        Assertions.assertThat(FeignClientException.MESSAGE).isEqualTo("Feign client failed");
     }
 }
 

@@ -44,7 +44,7 @@ In your code:
 
 ```java
 // Import class
-import ru.spb.tksoft.common.exception.UserNotFoundException;
+import ru.spb.tksoft.common.exceptions.UserNotFoundException;
 
 // Use exception
 UserEntity owner = userRepository.findByUserId(request.getUserId())

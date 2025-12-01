@@ -12,26 +12,26 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 /**
- * Request failed: request to external service failed.
+ * User not found.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class RequestFailedException extends TkBaseException {
+public class UserNotFoundException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 8942;
+    public static final int CODE = 892;
 
     /** Error message. */
-    public static final String MESSAGE = "Request failed";
+    public static final String MESSAGE = "User not found";
 
     /**
      * Default constructor.
      * 
      */
-    public RequestFailedException() {
+    public UserNotFoundException() {
 
         super(CODE, MESSAGE);
     }
@@ -41,7 +41,7 @@ public class RequestFailedException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public RequestFailedException(String subMessage) {
+    public UserNotFoundException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }

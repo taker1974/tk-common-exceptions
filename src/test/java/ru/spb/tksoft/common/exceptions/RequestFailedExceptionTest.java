@@ -12,49 +12,50 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for DuplicateObjectException.
+ * Tests for RequestFailedException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class DuplicateObjectExceptionTest {
+class RequestFailedExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        DuplicateObjectException exception = new DuplicateObjectException();
+        RequestFailedException exception = new RequestFailedException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(DuplicateObjectException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(RequestFailedException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "User with email already exists";
+        String subMessage = "External service unavailable";
 
         // When
-        DuplicateObjectException exception = new DuplicateObjectException(subMessage);
+        RequestFailedException exception = new RequestFailedException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Duplicate object: User with email already exists");
+                .isEqualTo("Request failed: External service unavailable");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(DuplicateObjectException.CODE).isEqualTo(7390);
-        Assertions.assertThat(DuplicateObjectException.MESSAGE).isEqualTo("Duplicate object");
+        Assertions.assertThat(RequestFailedException.CODE).isEqualTo(8942);
+        Assertions.assertThat(RequestFailedException.MESSAGE).isEqualTo("Request failed");
     }
 }
+
 

@@ -12,68 +12,49 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for TkBaseException.
+ * Tests for BadRequestException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class TkBaseExceptionTest {
-
-    /**
-     * Test exception for testing TkBaseException.
-     */
-    private static class TestException extends TkBaseException {
-
-        private static final int CODE = 9999;
-        private static final String MESSAGE = "Test exception";
-
-        TestException() {
-            super(CODE, MESSAGE);
-        }
-
-        TestException(String subMessage) {
-            super(CODE, MESSAGE + ": " + subMessage);
-        }
-    }
+class BadRequestExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        TestException exception = new TestException();
+        BadRequestException exception = new BadRequestException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception");
+        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(BadRequestException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Additional details";
+        String subMessage = "Invalid parameter value";
 
         // When
-        TestException exception = new TestException(subMessage);
+        BadRequestException exception = new BadRequestException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Test exception: Additional details");
+                .isEqualTo("Bad request: Invalid parameter value");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
-    void testInheritance() {
-        // Given & When
-        TestException exception = new TestException();
-
+    void testConstants() {
         // Then
-        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
+        Assertions.assertThat(BadRequestException.CODE).isEqualTo(400);
+        Assertions.assertThat(BadRequestException.MESSAGE).isEqualTo("Bad request");
     }
 }
 

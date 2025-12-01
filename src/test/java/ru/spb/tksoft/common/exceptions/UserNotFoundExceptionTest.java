@@ -12,52 +12,49 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for NullArgumentException.
+ * Tests for UserNotFoundException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class NullArgumentExceptionTest {
+class UserNotFoundExceptionTest {
 
     @Test
-    void testConstructorWithSubMessage() {
-        // Given
-        String subMessage = "userId parameter";
-
-        // When
-        NullArgumentException exception = new NullArgumentException(subMessage);
+    void testDefaultConstructor() {
+        // Given & When
+        UserNotFoundException exception = new UserNotFoundException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
-        Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Argument must not be null: userId parameter");
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(UserNotFoundException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
-    void testConstructorWithNullSubMessage() {
+    void testConstructorWithSubMessage() {
         // Given
-        String subMessage = null;
+        String subMessage = "User with email 'test@example.com' not found";
 
         // When
-        NullArgumentException exception = new NullArgumentException(subMessage);
+        UserNotFoundException exception = new UserNotFoundException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Argument must not be null: ");
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("User not found: User with email 'test@example.com' not found");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(NullArgumentException.CODE).isEqualTo(225);
-        Assertions.assertThat(NullArgumentException.MESSAGE).isEqualTo("Argument must not be null");
+        Assertions.assertThat(UserNotFoundException.CODE).isEqualTo(892);
+        Assertions.assertThat(UserNotFoundException.MESSAGE).isEqualTo("User not found");
     }
 }
 

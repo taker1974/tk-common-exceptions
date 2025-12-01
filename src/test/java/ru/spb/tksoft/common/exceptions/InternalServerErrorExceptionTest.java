@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,7 +31,8 @@ class InternalServerErrorExceptionTest {
 
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(InternalServerErrorException.MESSAGE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo(InternalServerErrorException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -54,7 +55,8 @@ class InternalServerErrorExceptionTest {
     void testConstants() {
         // Then
         Assertions.assertThat(InternalServerErrorException.CODE).isEqualTo(500);
-        Assertions.assertThat(InternalServerErrorException.MESSAGE).isEqualTo("Internal server error");
+        Assertions.assertThat(InternalServerErrorException.MESSAGE)
+                .isEqualTo("Internal server error");
     }
 }
 

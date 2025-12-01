@@ -12,38 +12,29 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
-
+package ru.spb.tksoft.common.exceptions;
 
 import java.util.Objects;
 
 /**
- * Object already exists.
+ * Null argument exception.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class ObjectAlreadyExistsException extends TkBaseException {
+public class NullArgumentException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 5371;
+    public static final int CODE = 225;
 
     /** Error message. */
-    public static final String MESSAGE = "Object already exists";
+    public static final String MESSAGE = "Argument must not be null";
 
     /**
-     * Default constructor.
-     */
-    public ObjectAlreadyExistsException() {
-
-        super(CODE, MESSAGE);
-    }
-
-    /**
-     * Constructor with additional message.
+     * Constructor.
      * 
      * @param subMessage - additional message.
      */
-    public ObjectAlreadyExistsException(String subMessage) {
+    public NullArgumentException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
     }

@@ -12,49 +12,52 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for ObjectNotFoundException.
+ * Tests for NullArgumentException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class ObjectNotFoundExceptionTest {
-
-    @Test
-    void testDefaultConstructor() {
-        // Given & When
-        ObjectNotFoundException exception = new ObjectNotFoundException();
-
-        // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(ObjectNotFoundException.MESSAGE);
-        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
-    }
+class NullArgumentExceptionTest {
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Project with id 123 not found";
+        String subMessage = "userId parameter";
 
         // When
-        ObjectNotFoundException exception = new ObjectNotFoundException(subMessage);
+        NullArgumentException exception = new NullArgumentException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Object not found: Project with id 123 not found");
+                .isEqualTo("Argument must not be null: userId parameter");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
+    }
+
+    @Test
+    void testConstructorWithNullSubMessage() {
+        // Given
+        String subMessage = null;
+
+        // When
+        NullArgumentException exception = new NullArgumentException(subMessage);
+
+        // Then
+        Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Argument must not be null: ");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);
-        Assertions.assertThat(ObjectNotFoundException.MESSAGE).isEqualTo("Object not found");
+        Assertions.assertThat(NullArgumentException.CODE).isEqualTo(225);
+        Assertions.assertThat(NullArgumentException.MESSAGE).isEqualTo("Argument must not be null");
     }
 }
 

@@ -12,7 +12,7 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import java.util.Objects;
 import lombok.Getter;

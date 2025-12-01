@@ -12,26 +12,26 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 /**
- * Bad request: client call us with invalid data.
+ * Duplicate object.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class BadRequestException extends TkBaseException {
+public class DuplicateObjectException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 400;
+    public static final int CODE = 7390;
 
     /** Error message. */
-    public static final String MESSAGE = "Bad request";
+    public static final String MESSAGE = "Duplicate object";
 
     /**
      * Default constructor.
      * 
      */
-    public BadRequestException() {
+    public DuplicateObjectException() {
 
         super(CODE, MESSAGE);
     }
@@ -41,7 +41,7 @@ public class BadRequestException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public BadRequestException(String subMessage) {
+    public DuplicateObjectException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }

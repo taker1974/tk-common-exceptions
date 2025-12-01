@@ -12,27 +12,26 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
-
-import java.util.Objects;
+package ru.spb.tksoft.common.exceptions;
 
 /**
- * Configuration mismatch.
+ * Request failed: request to external service failed.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class ConfigurationMismatchException extends TkBaseException {
+public class RequestFailedException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 2583;
+    public static final int CODE = 8942;
 
     /** Error message. */
-    public static final String MESSAGE = "Configuration mismatch";
+    public static final String MESSAGE = "Request failed";
 
     /**
      * Default constructor.
+     * 
      */
-    public ConfigurationMismatchException() {
+    public RequestFailedException() {
 
         super(CODE, MESSAGE);
     }
@@ -42,8 +41,8 @@ public class ConfigurationMismatchException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public ConfigurationMismatchException(String subMessage) {
+    public RequestFailedException(String subMessage) {
 
-        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        super(CODE, MESSAGE + ": " + subMessage);
     }
 }

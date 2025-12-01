@@ -12,49 +12,49 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for BadRequestException.
+ * Tests for DuplicateObjectException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class BadRequestExceptionTest {
+class DuplicateObjectExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        BadRequestException exception = new BadRequestException();
+        DuplicateObjectException exception = new DuplicateObjectException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(BadRequestException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(DuplicateObjectException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Invalid parameter value";
+        String subMessage = "User with email already exists";
 
         // When
-        BadRequestException exception = new BadRequestException(subMessage);
+        DuplicateObjectException exception = new DuplicateObjectException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Bad request: Invalid parameter value");
+                .isEqualTo("Duplicate object: User with email already exists");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(BadRequestException.CODE).isEqualTo(400);
-        Assertions.assertThat(BadRequestException.MESSAGE).isEqualTo("Bad request");
+        Assertions.assertThat(DuplicateObjectException.CODE).isEqualTo(7390);
+        Assertions.assertThat(DuplicateObjectException.MESSAGE).isEqualTo("Duplicate object");
     }
 }
 

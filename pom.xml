@@ -157,13 +157,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven-jar.version}</version>
-                <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Automatic-Module-Name>ru.spb.tksoft.common.exception</Automatic-Module-Name>
-                        </manifestEntries>
-                    </archive>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -204,7 +197,7 @@
                 <version>${maven-surefire.version}</version>
                 <configuration>
                     <argLine>--add-opens
-                        ru.spb.tksoft.common.exception/ru.spb.tksoft.common.exception=ALL-UNNAMED</argLine>
+                        ru.spb.tksoft.common.exceptions/ru.spb.tksoft.common.exceptions=ALL-UNNAMED</argLine>
                 </configuration>
             </plugin>
 

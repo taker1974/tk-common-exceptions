@@ -12,36 +12,38 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import lombok.Getter;
-import ru.spb.tksoft.utils.log.LogEx;
+import java.util.Objects;
 
 /**
- * Base exception abstract class.
+ * Configuration mismatch.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public abstract class TkBaseException extends RuntimeException {
-
-    private static final Logger log = LoggerFactory.getLogger(TkBaseException.class);
+public class ConfigurationMismatchException extends TkBaseException {
 
     /** Error code. */
-    @Getter
-    private final int code;
+    public static final int CODE = 2583;
+
+    /** Error message. */
+    public static final String MESSAGE = "Configuration mismatch";
 
     /**
-     * Base constructor.
-     * 
-     * @param code - error code.
-     * @param message - error message.
+     * Default constructor.
      */
-    protected TkBaseException(int code, String message) {
+    public ConfigurationMismatchException() {
 
-        super(message);
-        this.code = code;
-        LogEx.error(log, LogEx.me(), LogEx.EXCEPTION_THROWN, this.code, this);
+        super(CODE, MESSAGE);
+    }
+
+    /**
+     * Constructor with additional message.
+     * 
+     * @param subMessage - additional message.
+     */
+    public ConfigurationMismatchException(String subMessage) {
+
+        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
     }
 }

@@ -12,49 +12,49 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for UserNotFoundException.
+ * Tests for ObjectNotFoundException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class UserNotFoundExceptionTest {
+class ObjectNotFoundExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        UserNotFoundException exception = new UserNotFoundException();
+        ObjectNotFoundException exception = new ObjectNotFoundException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(UserNotFoundException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ObjectNotFoundException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "User with email 'test@example.com' not found";
+        String subMessage = "Project with id 123 not found";
 
         // When
-        UserNotFoundException exception = new UserNotFoundException(subMessage);
+        ObjectNotFoundException exception = new ObjectNotFoundException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("User not found: User with email 'test@example.com' not found");
+                .isEqualTo("Object not found: Project with id 123 not found");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(UserNotFoundException.CODE).isEqualTo(892);
-        Assertions.assertThat(UserNotFoundException.MESSAGE).isEqualTo("User not found");
+        Assertions.assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);
+        Assertions.assertThat(ObjectNotFoundException.MESSAGE).isEqualTo("Object not found");
     }
 }
 

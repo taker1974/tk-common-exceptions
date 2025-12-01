@@ -12,26 +12,26 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 /**
- * Object not found.
+ * Conversion failed.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class ObjectNotFoundException extends TkBaseException {
+public class ConversionFailedException extends TkBaseException {
 
     /** Error code. */
-    public static final int CODE = 8874;
+    public static final int CODE = 893;
 
     /** Error message. */
-    public static final String MESSAGE = "Object not found";
+    public static final String MESSAGE = "Conversion failed";
 
     /**
      * Default constructor.
      * 
      */
-    public ObjectNotFoundException() {
+    public ConversionFailedException() {
 
         super(CODE, MESSAGE);
     }
@@ -41,7 +41,7 @@ public class ObjectNotFoundException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public ObjectNotFoundException(String subMessage) {
+    public ConversionFailedException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }

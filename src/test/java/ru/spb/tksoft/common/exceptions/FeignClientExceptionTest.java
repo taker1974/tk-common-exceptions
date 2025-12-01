@@ -12,42 +12,41 @@
  * the License.
  */
 
-package ru.spb.tksoft.common.exception;
+package ru.spb.tksoft.common.exceptions;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for ObjectAlreadyExistsException.
+ * Tests for FeignClientException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class ObjectAlreadyExistsExceptionTest {
+class FeignClientExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException();
+        FeignClientException exception = new FeignClientException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        Assertions.assertThat(exception.getMessage())
-                .isEqualTo(ObjectAlreadyExistsException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(FeignClientException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "Project with name 'TestProject' already exists";
+        String subMessage = "Connection timeout";
 
         // When
-        ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException(subMessage);
+        FeignClientException exception = new FeignClientException(subMessage, 500);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Object already exists: Project with name 'TestProject' already exists");
+                .isEqualTo("Feign client failed: Connection timeout");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -57,20 +56,19 @@ class ObjectAlreadyExistsExceptionTest {
         String subMessage = null;
 
         // When
-        ObjectAlreadyExistsException exception = new ObjectAlreadyExistsException(subMessage);
+        FeignClientException exception = new FeignClientException(subMessage, 500);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Object already exists: ");
+        Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: ");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(ObjectAlreadyExistsException.CODE).isEqualTo(5371);
-        Assertions.assertThat(ObjectAlreadyExistsException.MESSAGE)
-                .isEqualTo("Object already exists");
+        Assertions.assertThat(FeignClientException.CODE).isEqualTo(8943);
+        Assertions.assertThat(FeignClientException.MESSAGE).isEqualTo("Feign client failed");
     }
 }
 
