@@ -8,7 +8,7 @@
     <groupId>ru.spb.tksoft</groupId>
     <artifactId>tk-common-exceptions</artifactId>
     <name>tk-common-exceptions</name>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <description>Common Exceptions from TKSoft.</description>
 
     <url>http://tksoft.spb.ru</url>
@@ -56,7 +56,7 @@
         <junit-jupiter.version>5.13.4</junit-jupiter.version>
 
         <slf4j.version>2.0.17</slf4j.version>
-        <tk-log-utils.version>2.0.5</tk-log-utils.version>
+        <tk-log-utils.version>2.0.6</tk-log-utils.version>
 
     </properties>
 
