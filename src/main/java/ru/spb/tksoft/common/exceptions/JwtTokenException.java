@@ -15,7 +15,7 @@
 package ru.spb.tksoft.common.exceptions;
 
 /**
- * User not found.
+ * JWT token exception: generation failed etc.
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
