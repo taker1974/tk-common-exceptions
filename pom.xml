@@ -8,7 +8,7 @@
     <groupId>ru.spb.tksoft</groupId>
     <artifactId>tk-common-exceptions</artifactId>
     <name>tk-common-exceptions</name>
-    <version>2.0.6</version>
+    <version>2.0.7</version>
     <description>Common Exceptions from TKSoft.</description>
 
     <url>http://tksoft.spb.ru</url>
