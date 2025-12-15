@@ -19,7 +19,7 @@ package ru.spb.tksoft.common.exceptions;
  * 
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-public class JwtTokenException extends TkBaseException {
+public class TkJwtTokenException extends TkBaseException {
 
     /** Error code. */
     public static final int CODE = 128;
@@ -31,7 +31,7 @@ public class JwtTokenException extends TkBaseException {
      * Default constructor.
      * 
      */
-    public JwtTokenException() {
+    public TkJwtTokenException() {
 
         super(CODE, MESSAGE);
     }
@@ -41,7 +41,7 @@ public class JwtTokenException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public JwtTokenException(String subMessage) {
+    public TkJwtTokenException(String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class JwtTokenException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public JwtTokenException(Throwable cause) {
+    public TkJwtTokenException(Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class JwtTokenException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public JwtTokenException(String subMessage, Throwable cause) {
+    public TkJwtTokenException(String subMessage, Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

@@ -18,20 +18,20 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for JwtTokenException.
+ * Tests for TkJwtTokenException.
  *
  * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
  */
-class JwtTokenExceptionTest {
+class TkJwtTokenExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        JwtTokenException exception = new JwtTokenException();
+        TkJwtTokenException exception = new TkJwtTokenException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(JwtTokenException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(JwtTokenException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(TkJwtTokenException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -41,10 +41,10 @@ class JwtTokenExceptionTest {
         String subMessage = "generation failed";
 
         // When
-        JwtTokenException exception = new JwtTokenException(subMessage);
+        TkJwtTokenException exception = new TkJwtTokenException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(JwtTokenException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
         Assertions.assertThat(exception.getMessage())
                 .isEqualTo("JWT token failed: generation failed");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
@@ -56,11 +56,11 @@ class JwtTokenExceptionTest {
         Throwable cause = new IllegalArgumentException("Missing secret source");
 
         // When
-        JwtTokenException exception = new JwtTokenException(cause);
+        TkJwtTokenException exception = new TkJwtTokenException(cause);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(JwtTokenException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(JwtTokenException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(TkJwtTokenException.MESSAGE);
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
     }
 
@@ -71,10 +71,10 @@ class JwtTokenExceptionTest {
         String subMessage = "system error";
 
         // When
-        JwtTokenException exception = new JwtTokenException(subMessage, cause);
+        TkJwtTokenException exception = new TkJwtTokenException(subMessage, cause);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(JwtTokenException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
         Assertions.assertThat(exception.getMessage())
                 .isEqualTo("JWT token failed: system error");
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
@@ -83,8 +83,8 @@ class JwtTokenExceptionTest {
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(JwtTokenException.CODE).isEqualTo(128);
-        Assertions.assertThat(JwtTokenException.MESSAGE).isEqualTo("JWT token failed");
+        Assertions.assertThat(TkJwtTokenException.CODE).isEqualTo(128);
+        Assertions.assertThat(TkJwtTokenException.MESSAGE).isEqualTo("JWT token failed");
     }
 }
 
