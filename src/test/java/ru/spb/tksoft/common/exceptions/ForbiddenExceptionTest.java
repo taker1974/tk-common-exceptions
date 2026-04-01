@@ -1,5 +1,5 @@
 /*
- * Copyright 2025 Konstantin Terskikh
+ * Copyright 2026 Konstantin Terskikh
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  * in compliance with the License. You may obtain a copy of the License at
@@ -18,73 +18,72 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 /**
- * Tests for TkJwtTokenException.
+ * Tests for ForbiddenException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2026
  */
-class TkJwtTokenExceptionTest {
+class ForbiddenExceptionTest {
 
     @Test
     void testDefaultConstructor() {
         // Given & When
-        TkJwtTokenException exception = new TkJwtTokenException();
+        ForbiddenException exception = new ForbiddenException();
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(TkJwtTokenException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ForbiddenException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ForbiddenException.MESSAGE);
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithSubMessage() {
         // Given
-        String subMessage = "generation failed";
+        String subMessage = "Invalid parameter value";
 
         // When
-        TkJwtTokenException exception = new TkJwtTokenException(subMessage);
+        ForbiddenException exception = new ForbiddenException(subMessage);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ForbiddenException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("JWT token failed: generation failed");
+                .isEqualTo("Forbidden: Invalid parameter value");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
     void testConstructorWithCause() {
         // Given
-        Throwable cause = new IllegalArgumentException("Missing secret source");
+        Throwable cause = new IllegalArgumentException("Invalid payload");
 
         // When
-        TkJwtTokenException exception = new TkJwtTokenException(cause);
+        ForbiddenException exception = new ForbiddenException(cause);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo(TkJwtTokenException.MESSAGE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ForbiddenException.CODE);
+        Assertions.assertThat(exception.getMessage()).isEqualTo(ForbiddenException.MESSAGE);
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
     }
 
     @Test
     void testConstructorWithSubMessageAndCause() {
         // Given
-        Throwable cause = new IllegalStateException("Signing failed");
-        String subMessage = "system error";
+        Throwable cause = new IllegalStateException("Broken state");
+        String subMessage = "Payload mismatch";
 
         // When
-        TkJwtTokenException exception = new TkJwtTokenException(subMessage, cause);
+        ForbiddenException exception = new ForbiddenException(subMessage, cause);
 
         // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(TkJwtTokenException.CODE);
+        Assertions.assertThat(exception.getCode()).isEqualTo(ForbiddenException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("JWT token failed: system error");
+                .isEqualTo("Forbidden: Payload mismatch");
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
     }
 
     @Test
     void testConstants() {
         // Then
-        Assertions.assertThat(TkJwtTokenException.CODE).isEqualTo(128);
-        Assertions.assertThat(TkJwtTokenException.MESSAGE).isEqualTo("JWT token failed");
+        Assertions.assertThat(ForbiddenException.CODE).isEqualTo(1325);
+        Assertions.assertThat(ForbiddenException.MESSAGE).isEqualTo("Forbidden");
     }
 }
-
