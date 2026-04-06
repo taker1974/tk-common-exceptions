@@ -76,6 +76,13 @@ class TkBaseExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        TestException exception = new TestException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(9999);
+    }
+
+    @Test
     void testInheritance() {
         // Given & When
         TestException exception = new TestException();
@@ -111,6 +118,11 @@ class TkBaseExceptionTest {
         Assertions.assertThat(exception.getCode()).isEqualTo(9999);
         Assertions.assertThat(exception.getMessage()).isEqualTo("Test exception: More details");
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(TestException::new);
     }
 }
 

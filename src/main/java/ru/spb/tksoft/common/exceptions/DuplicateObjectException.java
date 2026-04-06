@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Duplicate object.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class DuplicateObjectException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class DuplicateObjectException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public DuplicateObjectException(String subMessage) {
+    public DuplicateObjectException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class DuplicateObjectException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public DuplicateObjectException(Throwable cause) {
+    public DuplicateObjectException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class DuplicateObjectException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public DuplicateObjectException(String subMessage, Throwable cause) {
+    public DuplicateObjectException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

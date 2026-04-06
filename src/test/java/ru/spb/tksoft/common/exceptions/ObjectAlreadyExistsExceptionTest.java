@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for ObjectAlreadyExistsException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class ObjectAlreadyExistsExceptionTest {
 
@@ -61,7 +61,7 @@ class ObjectAlreadyExistsExceptionTest {
 
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(ObjectAlreadyExistsException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Object already exists: ");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Object already exists: null");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -103,6 +103,12 @@ class ObjectAlreadyExistsExceptionTest {
         Assertions.assertThat(ObjectAlreadyExistsException.CODE).isEqualTo(5371);
         Assertions.assertThat(ObjectAlreadyExistsException.MESSAGE)
                 .isEqualTo("Object already exists");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                ObjectAlreadyExistsException::new);
     }
 }
 

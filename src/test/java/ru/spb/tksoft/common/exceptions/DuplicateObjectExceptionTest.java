@@ -51,6 +51,13 @@ class DuplicateObjectExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        DuplicateObjectException exception = new DuplicateObjectException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Duplicate object: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(DuplicateObjectException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Duplicate key");
@@ -85,6 +92,11 @@ class DuplicateObjectExceptionTest {
         // Then
         Assertions.assertThat(DuplicateObjectException.CODE).isEqualTo(7390);
         Assertions.assertThat(DuplicateObjectException.MESSAGE).isEqualTo("Duplicate object");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(DuplicateObjectException::new);
     }
 }
 

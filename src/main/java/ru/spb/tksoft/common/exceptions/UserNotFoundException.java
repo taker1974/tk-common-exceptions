@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * User not found.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class UserNotFoundException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class UserNotFoundException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public UserNotFoundException(String subMessage) {
+    public UserNotFoundException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class UserNotFoundException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public UserNotFoundException(Throwable cause) {
+    public UserNotFoundException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class UserNotFoundException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public UserNotFoundException(String subMessage, Throwable cause) {
+    public UserNotFoundException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

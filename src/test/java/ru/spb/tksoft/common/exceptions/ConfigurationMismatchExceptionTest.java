@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for ConfigurationMismatchException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class ConfigurationMismatchExceptionTest {
 
@@ -61,7 +61,7 @@ class ConfigurationMismatchExceptionTest {
 
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(ConfigurationMismatchException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Configuration mismatch: ");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Configuration mismatch: null");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -103,6 +103,12 @@ class ConfigurationMismatchExceptionTest {
         Assertions.assertThat(ConfigurationMismatchException.CODE).isEqualTo(2583);
         Assertions.assertThat(ConfigurationMismatchException.MESSAGE)
                 .isEqualTo("Configuration mismatch");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                ConfigurationMismatchException::new);
     }
 }
 

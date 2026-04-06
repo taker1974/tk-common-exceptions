@@ -51,6 +51,13 @@ class UnauthorizedExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        UnauthorizedException exception = new UnauthorizedException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Unauthorized: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(UnauthorizedException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid payload");
@@ -85,5 +92,10 @@ class UnauthorizedExceptionTest {
         // Then
         Assertions.assertThat(UnauthorizedException.CODE).isEqualTo(1324);
         Assertions.assertThat(UnauthorizedException.MESSAGE).isEqualTo("Unauthorized");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(UnauthorizedException::new);
     }
 }

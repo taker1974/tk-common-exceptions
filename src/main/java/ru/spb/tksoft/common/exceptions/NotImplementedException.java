@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Not implemented: method, algorithm etc.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class NotImplementedException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class NotImplementedException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public NotImplementedException(String subMessage) {
+    public NotImplementedException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class NotImplementedException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public NotImplementedException(Throwable cause) {
+    public NotImplementedException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class NotImplementedException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public NotImplementedException(String subMessage, Throwable cause) {
+    public NotImplementedException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

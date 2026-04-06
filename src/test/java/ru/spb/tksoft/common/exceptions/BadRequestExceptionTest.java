@@ -51,6 +51,13 @@ class BadRequestExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        BadRequestException exception = new BadRequestException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Bad request: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(BadRequestException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid payload");
@@ -85,6 +92,11 @@ class BadRequestExceptionTest {
         // Then
         Assertions.assertThat(BadRequestException.CODE).isEqualTo(400);
         Assertions.assertThat(BadRequestException.MESSAGE).isEqualTo("Bad request");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(BadRequestException::new);
     }
 }
 

@@ -51,6 +51,13 @@ class JwtTokenExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        JwtTokenException exception = new JwtTokenException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("JWT token failed: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(JwtTokenException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Missing secret source");
@@ -85,6 +92,11 @@ class JwtTokenExceptionTest {
         // Then
         Assertions.assertThat(JwtTokenException.CODE).isEqualTo(128);
         Assertions.assertThat(JwtTokenException.MESSAGE).isEqualTo("JWT token failed");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(JwtTokenException::new);
     }
 }
 

@@ -14,12 +14,10 @@
 
 package ru.spb.tksoft.common.exceptions;
 
-import java.util.Objects;
-
 /**
  * Null or empty argument exception.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2026
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class NullOrEmptyArgumentException extends TkBaseException {
 
@@ -34,9 +32,9 @@ public class NullOrEmptyArgumentException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public NullOrEmptyArgumentException(String subMessage) {
+    public NullOrEmptyArgumentException(final String subMessage) {
 
-        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        super(CODE, MESSAGE + ": " + subMessage);
     }
 
     /**
@@ -44,7 +42,7 @@ public class NullOrEmptyArgumentException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public NullOrEmptyArgumentException(Throwable cause) {
+    public NullOrEmptyArgumentException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -55,7 +53,7 @@ public class NullOrEmptyArgumentException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public NullOrEmptyArgumentException(String subMessage, Throwable cause) {
+    public NullOrEmptyArgumentException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

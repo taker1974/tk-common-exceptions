@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Bad request: client call us with invalid data.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class BadRequestException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class BadRequestException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public BadRequestException(String subMessage) {
+    public BadRequestException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class BadRequestException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public BadRequestException(Throwable cause) {
+    public BadRequestException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class BadRequestException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public BadRequestException(String subMessage, Throwable cause) {
+    public BadRequestException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

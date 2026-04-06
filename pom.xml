@@ -8,7 +8,7 @@
     <groupId>ru.spb.tksoft</groupId>
     <artifactId>tk-common-exceptions</artifactId>
     <name>tk-common-exceptions</name>
-    <version>2.0.9</version>
+    <version>2.1.0</version>
     <description>Common Exceptions from TKSoft.</description>
 
     <url>http://tksoft.spb.ru</url>
@@ -49,11 +49,12 @@
         <maven-source.version>3.3.1</maven-source.version>
         <maven-surefire.version>3.5.4</maven-surefire.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-        <jakarta-validation.version>3.1.1</jakarta-validation.version>
 
         <mockito.version>5.20.0</mockito.version>
         <assertj.version>3.27.6</assertj.version>
         <junit-jupiter.version>5.13.4</junit-jupiter.version>
+
+        <logback.version>1.5.18</logback.version>
 
         <slf4j.version>2.0.17</slf4j.version>
         <tk-log-utils.version>2.0.6</tk-log-utils.version>
@@ -98,9 +99,10 @@
         </dependency>
 
         <dependency>
-            <groupId>jakarta.validation</groupId>
-            <artifactId>jakarta.validation-api</artifactId>
-            <version>${jakarta-validation.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
@@ -177,8 +179,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>${maven-javadoc.version}</version>
                 <configuration>
-                    <doclint>none</doclint>
-                    <failOnError>false</failOnError>
+                    <failOnError>true</failOnError>
                 </configuration>
                 <executions>
                     <execution>

@@ -52,6 +52,13 @@ class InternalServerErrorExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        InternalServerErrorException exception = new InternalServerErrorException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Internal server error: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(InternalServerErrorException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid server state");
@@ -89,6 +96,12 @@ class InternalServerErrorExceptionTest {
         Assertions.assertThat(InternalServerErrorException.CODE).isEqualTo(500);
         Assertions.assertThat(InternalServerErrorException.MESSAGE)
                 .isEqualTo("Internal server error");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                InternalServerErrorException::new);
     }
 }
 

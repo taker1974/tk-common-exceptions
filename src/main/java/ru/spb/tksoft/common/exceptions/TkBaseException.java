@@ -20,25 +20,33 @@ import lombok.Getter;
 import ru.spb.tksoft.utils.log.LogEx;
 
 /**
- * Base exception abstract class.
- * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * Abstract base for TKSoft unchecked exceptions.
+ *
+ * <p><strong>Logging contract:</strong> each constructor records a structured error log entry when
+ * the exception instance is created. Logging uses the {@linkplain org.slf4j.Logger SLF4J} logger
+ * for {@code TkBaseException} together with {@link ru.spb.tksoft.utils.log.LogEx} (see
+ * {@link LogEx#EXCEPTION_THROWN}). This is intentional: constructing the exception performs a
+ * logging side effect for traceability. Do not instantiate these exceptions only to emit logs;
+ * throw them when the corresponding failure condition actually occurs (and handle duplicates in
+ * upper layers if the same event must not be logged twice).</p>
+ *
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public abstract class TkBaseException extends RuntimeException {
 
     private static final Logger log = LoggerFactory.getLogger(TkBaseException.class);
 
-    /** Error code. */
+    /** Application-specific numeric error code carried by this exception. */
     @Getter
     private final int code;
 
     /**
      * Base constructor.
-     * 
-     * @param code - error code.
-     * @param message - error message.
+     *
+     * @param code numeric error code
+     * @param message detail message passed to {@link RuntimeException#RuntimeException(String)}
      */
-    protected TkBaseException(int code, String message) {
+    protected TkBaseException(final int code, final String message) {
 
         super(message);
         this.code = code;
@@ -47,12 +55,12 @@ public abstract class TkBaseException extends RuntimeException {
 
     /**
      * Base constructor with cause.
-     * 
-     * @param code - error code.
-     * @param message - error message.
-     * @param cause - cause of the exception.
+     *
+     * @param code numeric error code
+     * @param message detail message passed to {@link RuntimeException#RuntimeException(String, Throwable)}
+     * @param cause the cause (may be {@code null})
      */
-    protected TkBaseException(int code, String message, Throwable cause) {
+    protected TkBaseException(final int code, final String message, final Throwable cause) {
 
         super(message, cause);
         this.code = code;

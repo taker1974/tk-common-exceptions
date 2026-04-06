@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for FeignClientException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class FeignClientExceptionTest {
 
@@ -60,7 +60,7 @@ class FeignClientExceptionTest {
 
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(FeignClientException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: ");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Feign client failed: null");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -100,6 +100,11 @@ class FeignClientExceptionTest {
         // Then
         Assertions.assertThat(FeignClientException.CODE).isEqualTo(8943);
         Assertions.assertThat(FeignClientException.MESSAGE).isEqualTo("Feign client failed");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(FeignClientException::new);
     }
 }
 

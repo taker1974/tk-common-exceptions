@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Conversion failed.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class ConversionFailedException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class ConversionFailedException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public ConversionFailedException(String subMessage) {
+    public ConversionFailedException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class ConversionFailedException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public ConversionFailedException(Throwable cause) {
+    public ConversionFailedException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class ConversionFailedException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public ConversionFailedException(String subMessage, Throwable cause) {
+    public ConversionFailedException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

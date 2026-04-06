@@ -51,6 +51,13 @@ class ObjectNotFoundExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        ObjectNotFoundException exception = new ObjectNotFoundException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Object not found: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(ObjectNotFoundException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Missing object");
@@ -84,6 +91,11 @@ class ObjectNotFoundExceptionTest {
         // Then
         Assertions.assertThat(ObjectNotFoundException.CODE).isEqualTo(8874);
         Assertions.assertThat(ObjectNotFoundException.MESSAGE).isEqualTo("Object not found");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(ObjectNotFoundException::new);
     }
 }
 

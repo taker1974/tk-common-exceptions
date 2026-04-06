@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for NullArgumentException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class NullArgumentExceptionTest {
 
@@ -49,7 +49,7 @@ class NullArgumentExceptionTest {
 
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(NullArgumentException.CODE);
-        Assertions.assertThat(exception.getMessage()).isEqualTo("Argument must not be null: ");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Argument must not be null: null");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -88,6 +88,12 @@ class NullArgumentExceptionTest {
         // Then
         Assertions.assertThat(NullArgumentException.CODE).isEqualTo(225);
         Assertions.assertThat(NullArgumentException.MESSAGE).isEqualTo("Argument must not be null");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                () -> new NullArgumentException("logged-on-construct"));
     }
 }
 

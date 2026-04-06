@@ -51,6 +51,13 @@ class RequestFailedExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        RequestFailedException exception = new RequestFailedException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Request failed: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(RequestFailedException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid request");
@@ -84,6 +91,11 @@ class RequestFailedExceptionTest {
         // Then
         Assertions.assertThat(RequestFailedException.CODE).isEqualTo(8942);
         Assertions.assertThat(RequestFailedException.MESSAGE).isEqualTo("Request failed");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(RequestFailedException::new);
     }
 }
 

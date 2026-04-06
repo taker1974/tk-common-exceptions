@@ -52,6 +52,13 @@ class DataIntegrityViolationExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        DataIntegrityViolationException exception = new DataIntegrityViolationException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Data integrity violation: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(DataIntegrityViolationException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid payload");
@@ -89,6 +96,12 @@ class DataIntegrityViolationExceptionTest {
         Assertions.assertThat(DataIntegrityViolationException.CODE).isEqualTo(409);
         Assertions.assertThat(DataIntegrityViolationException.MESSAGE)
                 .isEqualTo("Data integrity violation");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                DataIntegrityViolationException::new);
     }
 }
 

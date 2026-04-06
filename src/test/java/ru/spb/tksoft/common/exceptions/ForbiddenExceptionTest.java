@@ -51,6 +51,13 @@ class ForbiddenExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        ForbiddenException exception = new ForbiddenException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Forbidden: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(ForbiddenException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Invalid payload");
@@ -85,5 +92,10 @@ class ForbiddenExceptionTest {
         // Then
         Assertions.assertThat(ForbiddenException.CODE).isEqualTo(1325);
         Assertions.assertThat(ForbiddenException.MESSAGE).isEqualTo("Forbidden");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(ForbiddenException::new);
     }
 }

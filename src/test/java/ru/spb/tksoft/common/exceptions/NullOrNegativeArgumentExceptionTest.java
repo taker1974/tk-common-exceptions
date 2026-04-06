@@ -20,7 +20,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for NullOrNegativeArgumentException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2026
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class NullOrNegativeArgumentExceptionTest {
 
@@ -50,7 +50,7 @@ class NullOrNegativeArgumentExceptionTest {
         // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(NullOrNegativeArgumentException.CODE);
         Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Argument must not be null or negative: ");
+                .isEqualTo("Argument must not be null or negative: null");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
@@ -92,5 +92,11 @@ class NullOrNegativeArgumentExceptionTest {
         Assertions.assertThat(NullOrNegativeArgumentException.CODE).isEqualTo(6284);
         Assertions.assertThat(NullOrNegativeArgumentException.MESSAGE)
                 .isEqualTo("Argument must not be null or negative");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(
+                () -> new NullOrNegativeArgumentException("logged-on-construct"));
     }
 }

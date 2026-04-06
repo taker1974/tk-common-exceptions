@@ -14,12 +14,10 @@
 
 package ru.spb.tksoft.common.exceptions;
 
-import java.util.Objects;
-
 /**
  * Null or negative argument exception.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2026
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class NullOrNegativeArgumentException extends TkBaseException {
 
@@ -34,9 +32,9 @@ public class NullOrNegativeArgumentException extends TkBaseException {
      *
      * @param subMessage - additional message.
      */
-    public NullOrNegativeArgumentException(String subMessage) {
+    public NullOrNegativeArgumentException(final String subMessage) {
 
-        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        super(CODE, MESSAGE + ": " + subMessage);
     }
 
     /**
@@ -44,7 +42,7 @@ public class NullOrNegativeArgumentException extends TkBaseException {
      *
      * @param cause - cause of the exception.
      */
-    public NullOrNegativeArgumentException(Throwable cause) {
+    public NullOrNegativeArgumentException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -55,7 +53,7 @@ public class NullOrNegativeArgumentException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public NullOrNegativeArgumentException(String subMessage, Throwable cause) {
+    public NullOrNegativeArgumentException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

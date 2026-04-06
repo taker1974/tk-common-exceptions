@@ -14,12 +14,10 @@
 
 package ru.spb.tksoft.common.exceptions;
 
-import java.util.Objects;
-
 /**
  * Configuration mismatch.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class ConfigurationMismatchException extends TkBaseException {
 
@@ -42,9 +40,9 @@ public class ConfigurationMismatchException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public ConfigurationMismatchException(String subMessage) {
+    public ConfigurationMismatchException(final String subMessage) {
 
-        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        super(CODE, MESSAGE + ": " + subMessage);
     }
 
     /**
@@ -52,7 +50,7 @@ public class ConfigurationMismatchException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public ConfigurationMismatchException(Throwable cause) {
+    public ConfigurationMismatchException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -63,7 +61,7 @@ public class ConfigurationMismatchException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public ConfigurationMismatchException(String subMessage, Throwable cause) {
+    public ConfigurationMismatchException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

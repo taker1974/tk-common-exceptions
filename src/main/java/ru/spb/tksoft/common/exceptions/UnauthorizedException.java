@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Unauthorized user.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class UnauthorizedException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class UnauthorizedException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public UnauthorizedException(String subMessage) {
+    public UnauthorizedException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class UnauthorizedException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public UnauthorizedException(Throwable cause) {
+    public UnauthorizedException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class UnauthorizedException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public UnauthorizedException(String subMessage, Throwable cause) {
+    public UnauthorizedException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

@@ -1,20 +1,47 @@
-# tk-common-exceptions: общеприменимые исключения от TKSoft
+# tk-common-exceptions: общие исключения TKSoft
 
 ## Что это
 
-Общеприменимые исключения.  
-В данный модуль входят следующие классы исключений:
+Небольшая библиотека непроверяемых исключений с числовыми кодами, общими сообщениями и структурированным логированием при создании экземпляра (см. JavaDoc у `TkBaseException`).
 
-- [`BadRequestException`](src/main/java/ru/spb/tksoft/common/exception/BadRequestException.java)
-- [`RequestFailedException`](src/main/java/ru/spb/tksoft/common/exception/RequestFailedException.java)
-- [`ConfigurationMismatchException`](src/main/java/ru/spb/tksoft/common/exception/ConfigurationMismatchException.java)
-- [`ConversionFailedException`](src/main/java/ru/spb/tksoft/common/exception/ConversionFailedException.java)
-- [`DuplicateObjectException`](src/main/java/ru/spb/tksoft/common/exception/DuplicateObjectException.java)
-- [`NullArgumentException`](src/main/java/ru/spb/tksoft/common/exception/NullArgumentException.java)
-- [`ObjectAlreadyExistsException`](src/main/java/ru/spb/tksoft/common/exception/ObjectAlreadyExistsException.java)
-- [`ObjectNotFoundException`](src/main/java/ru/spb/tksoft/common/exception/ObjectNotFoundException.java)
-- [`UserNotFoundException`](src/main/java/ru/spb/tksoft/common/exception/UserNotFoundException.java)
-- [`TkBaseException`](src/main/java/ru/spb/tksoft/common/exception/TkBaseException.java)
+Требуется **Java 21**. Поставляется как JPMS-модуль (`module ru.spb.tksoft.common.exceptions`).
+
+### Классы исключений
+
+У каждого конкретного типа исключения объявлена публичная константа `CODE` (число, передаваемое в `TkBaseException` и доступное через `getCode()`). У базового класса фиксированного кода нет.
+
+| Класс | `CODE` | Файл |
+| --- | ---: | --- |
+| `TkBaseException` | — | [`TkBaseException.java`](src/main/java/ru/spb/tksoft/common/exceptions/TkBaseException.java) |
+| `BadRequestException` | 400 | [`BadRequestException.java`](src/main/java/ru/spb/tksoft/common/exceptions/BadRequestException.java) |
+| `ConfigurationMismatchException` | 2583 | [`ConfigurationMismatchException.java`](src/main/java/ru/spb/tksoft/common/exceptions/ConfigurationMismatchException.java) |
+| `ConversionFailedException` | 893 | [`ConversionFailedException.java`](src/main/java/ru/spb/tksoft/common/exceptions/ConversionFailedException.java) |
+| `DataIntegrityViolationException` | 409 | [`DataIntegrityViolationException.java`](src/main/java/ru/spb/tksoft/common/exceptions/DataIntegrityViolationException.java) |
+| `DuplicateObjectException` | 7390 | [`DuplicateObjectException.java`](src/main/java/ru/spb/tksoft/common/exceptions/DuplicateObjectException.java) |
+| `FeignClientException` | 8943 | [`FeignClientException.java`](src/main/java/ru/spb/tksoft/common/exceptions/FeignClientException.java) |
+| `ForbiddenException` | 1325 | [`ForbiddenException.java`](src/main/java/ru/spb/tksoft/common/exceptions/ForbiddenException.java) |
+| `InternalServerErrorException` | 500 | [`InternalServerErrorException.java`](src/main/java/ru/spb/tksoft/common/exceptions/InternalServerErrorException.java) |
+| `JwtTokenException` | 128 | [`JwtTokenException.java`](src/main/java/ru/spb/tksoft/common/exceptions/JwtTokenException.java) |
+| `NotImplementedException` | 3348 | [`NotImplementedException.java`](src/main/java/ru/spb/tksoft/common/exceptions/NotImplementedException.java) |
+| `NullArgumentException` | 225 | [`NullArgumentException.java`](src/main/java/ru/spb/tksoft/common/exceptions/NullArgumentException.java) |
+| `NullOrEmptyArgumentException` | 226 | [`NullOrEmptyArgumentException.java`](src/main/java/ru/spb/tksoft/common/exceptions/NullOrEmptyArgumentException.java) |
+| `NullOrNegativeArgumentException` | 6284 | [`NullOrNegativeArgumentException.java`](src/main/java/ru/spb/tksoft/common/exceptions/NullOrNegativeArgumentException.java) |
+| `ObjectAlreadyExistsException` | 5371 | [`ObjectAlreadyExistsException.java`](src/main/java/ru/spb/tksoft/common/exceptions/ObjectAlreadyExistsException.java) |
+| `ObjectNotFoundException` | 8874 | [`ObjectNotFoundException.java`](src/main/java/ru/spb/tksoft/common/exceptions/ObjectNotFoundException.java) |
+| `RequestFailedException` | 8942 | [`RequestFailedException.java`](src/main/java/ru/spb/tksoft/common/exceptions/RequestFailedException.java) |
+| `UnauthorizedException` | 1324 | [`UnauthorizedException.java`](src/main/java/ru/spb/tksoft/common/exceptions/UnauthorizedException.java) |
+| `UserNotFoundException` | 892 | [`UserNotFoundException.java`](src/main/java/ru/spb/tksoft/common/exceptions/UserNotFoundException.java) |
+
+### Зависимости (runtime)
+
+- **SLF4J** (`org.slf4j:slf4j-api`) — API логирования.
+- **tk-log-utils** — обёртки для структурированного лога, используются в `TkBaseException`.
+
+В приложении нужна привязка SLF4J (например Logback). Зависимость `logback-classic` в артефакте **опциональна** и используется в тестах; в runtime не обязательна.
+
+### Контракт логирования
+
+При каждом создании подкласса `TkBaseException` вызывается структурированная запись уровня **error** через SLF4J (через `tk-log-utils`). Это ожидаемое поведение: исключение одновременно сигнал и точка трассировки. Не создавайте такие исключения только ради строки в логе.
 
 ## Быстрый старт
 
@@ -22,12 +49,11 @@
 mvn clean install
 ```
 
-В вашем приложении, в pom.xml:
+В `pom.xml` приложения:
 
 ```xml
 <properties>
-    ...
-    <tk-common-exceptions.version>1.0.0</tk-common-exceptions.version>
+    <tk-common-exceptions.version>2.0.9</tk-common-exceptions.version>
 </properties>
 
 <dependencies>
@@ -36,28 +62,32 @@ mvn clean install
         <artifactId>tk-common-exceptions</artifactId>
         <version>${tk-common-exceptions.version}</version>
     </dependency>
-    ...
 </dependencies>
 ```
 
-В вашем коде:
+В `module-info.java`:
 
-```Java
-// Import class
+```java
+requires ru.spb.tksoft.common.exceptions;
+```
+
+В коде:
+
+```java
 import ru.spb.tksoft.common.exceptions.UserNotFoundException;
 
-// Use exception
-UserEntity owner = userRepository.findByUserId(request.getUserId())
+var owner = userRepository.findByUserId(request.getUserId())
         .orElseThrow(UserNotFoundException::new);
-
 ```
 
 ## Лицензирование
 
-Этот модуль распространяется по лицензии Apache 2.0. Подробности см. в файле LICENSE.
+Модуль распространяется по лицензии Apache 2.0. Подробности см. в файле LICENSE.
 
 ## Автор
 
-Константин Терских
-Email: <kostus.online.1974@yandex.ru>, <kostus.online@gmail.com>
-Санкт-Петербург, 2025 год
+Константин Терских  
+Email: `kostus.online.1974@yandex.ru`, `kostus.online@gmail.com`  
+Санкт-Петербург
+
+Англоязычная версия: [README.md](README.md).

@@ -51,6 +51,13 @@ class UserNotFoundExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        UserNotFoundException exception = new UserNotFoundException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("User not found: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(UserNotFoundException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new IllegalArgumentException("Missing user");
@@ -85,6 +92,11 @@ class UserNotFoundExceptionTest {
         // Then
         Assertions.assertThat(UserNotFoundException.CODE).isEqualTo(892);
         Assertions.assertThat(UserNotFoundException.MESSAGE).isEqualTo("User not found");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(UserNotFoundException::new);
     }
 }
 

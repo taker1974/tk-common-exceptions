@@ -14,13 +14,12 @@
 
 package ru.spb.tksoft.common.exceptions;
 
-import java.util.Objects;
 import lombok.Getter;
 
 /**
  * Feign client exception.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class FeignClientException extends TkBaseException {
 
@@ -45,10 +44,11 @@ public class FeignClientException extends TkBaseException {
      * Constructor with additional message.
      * 
      * @param subMessage - additional message.
+     * @param statusCode - status code.
      */
-    public FeignClientException(String subMessage, int statusCode) {
+    public FeignClientException(final String subMessage, final int statusCode) {
 
-        super(CODE, MESSAGE + ": " + (Objects.isNull(subMessage) ? "" : subMessage));
+        super(CODE, MESSAGE + ": " + subMessage);
         this.statusCode = statusCode;
     }
 
@@ -57,7 +57,7 @@ public class FeignClientException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public FeignClientException(Throwable cause) {
+    public FeignClientException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
         this.statusCode = 0;
@@ -69,7 +69,7 @@ public class FeignClientException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public FeignClientException(String subMessage, Throwable cause) {
+    public FeignClientException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
         this.statusCode = 0;

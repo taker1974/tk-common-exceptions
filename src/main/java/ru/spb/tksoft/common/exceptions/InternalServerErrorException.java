@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Internal server error: something went wrong on the server side.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class InternalServerErrorException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class InternalServerErrorException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public InternalServerErrorException(String subMessage) {
+    public InternalServerErrorException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class InternalServerErrorException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public InternalServerErrorException(Throwable cause) {
+    public InternalServerErrorException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class InternalServerErrorException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public InternalServerErrorException(String subMessage, Throwable cause) {
+    public InternalServerErrorException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }

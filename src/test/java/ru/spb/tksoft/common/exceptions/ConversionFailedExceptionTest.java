@@ -51,6 +51,13 @@ class ConversionFailedExceptionTest {
     }
 
     @Test
+    void testConstructorWithNullSubMessage() {
+        ConversionFailedException exception = new ConversionFailedException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Conversion failed: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(ConversionFailedException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
         // Given
         Throwable cause = new NumberFormatException("Invalid number");
@@ -85,6 +92,11 @@ class ConversionFailedExceptionTest {
         // Then
         Assertions.assertThat(ConversionFailedException.CODE).isEqualTo(893);
         Assertions.assertThat(ConversionFailedException.MESSAGE).isEqualTo("Conversion failed");
+    }
+
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(ConversionFailedException::new);
     }
 }
 

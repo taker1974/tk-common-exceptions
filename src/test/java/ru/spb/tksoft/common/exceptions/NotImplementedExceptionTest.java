@@ -20,45 +20,39 @@ import org.junit.jupiter.api.Test;
 /**
  * Tests for NotImplementedException.
  *
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 class NotImplementedExceptionTest {
 
     @Test
     void testDefaultConstructor() {
-        // Given & When
         NotImplementedException exception = new NotImplementedException();
-
-        // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
         Assertions.assertThat(exception.getMessage()).isEqualTo(NotImplementedException.MESSAGE);
-        Assertions.assertThat(exception).isInstanceOf(NotImplementedException.class);
-    }
-
-    @Test
-    void testConstructorWithSubMessage() {
-        // Given
-        String subMessage = "Test method not implemented";
-
-        // When
-        NotImplementedException exception = new NotImplementedException(subMessage);
-
-        // Then
-        Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
-        Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Not implemented: Test method not implemented");
         Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
     }
 
     @Test
+    void testConstructorWithSubMessage() {
+        String subMessage = "PATCH /widgets not supported";
+        NotImplementedException exception = new NotImplementedException(subMessage);
+        Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
+        Assertions.assertThat(exception.getMessage())
+                .isEqualTo("Not implemented: PATCH /widgets not supported");
+        Assertions.assertThat(exception).isInstanceOf(TkBaseException.class);
+    }
+
+    @Test
+    void testConstructorWithNullSubMessage() {
+        NotImplementedException exception = new NotImplementedException((String) null);
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Not implemented: null");
+        Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
+    }
+
+    @Test
     void testConstructorWithCause() {
-        // Given
-        Throwable cause = new IllegalArgumentException("Invalid payload");
-
-        // When
+        Throwable cause = new UnsupportedOperationException("No backend");
         NotImplementedException exception = new NotImplementedException(cause);
-
-        // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
         Assertions.assertThat(exception.getMessage()).isEqualTo(NotImplementedException.MESSAGE);
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
@@ -66,25 +60,22 @@ class NotImplementedExceptionTest {
 
     @Test
     void testConstructorWithSubMessageAndCause() {
-        // Given
-        Throwable cause = new IllegalStateException("Broken state");
-        String subMessage = "Payload mismatch";
-
-        // When
+        Throwable cause = new IllegalStateException("Feature flag off");
+        String subMessage = "Export to PDF";
         NotImplementedException exception = new NotImplementedException(subMessage, cause);
-
-        // Then
         Assertions.assertThat(exception.getCode()).isEqualTo(NotImplementedException.CODE);
-        Assertions.assertThat(exception.getMessage())
-                .isEqualTo("Not implemented: Payload mismatch");
+        Assertions.assertThat(exception.getMessage()).isEqualTo("Not implemented: Export to PDF");
         Assertions.assertThat(exception.getCause()).isEqualTo(cause);
     }
 
     @Test
     void testConstants() {
-        // Then
         Assertions.assertThat(NotImplementedException.CODE).isEqualTo(3348);
         Assertions.assertThat(NotImplementedException.MESSAGE).isEqualTo("Not implemented");
     }
-}
 
+    @Test
+    void constructorEmitsErrorThroughSlf4jLoggerForTkBaseException() {
+        TkBaseExceptionLoggingAssertions.assertErrorLoggedWhenConstructorRuns(NotImplementedException::new);
+    }
+}

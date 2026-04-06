@@ -17,7 +17,7 @@ package ru.spb.tksoft.common.exceptions;
 /**
  * Object not found.
  * 
- * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025
+ * @author Konstantin Terskikh, kostus.online.1974@yandex.ru, 2025-2026
  */
 public class ObjectNotFoundException extends TkBaseException {
 
@@ -41,7 +41,7 @@ public class ObjectNotFoundException extends TkBaseException {
      * 
      * @param subMessage - additional message.
      */
-    public ObjectNotFoundException(String subMessage) {
+    public ObjectNotFoundException(final String subMessage) {
 
         super(CODE, MESSAGE + ": " + subMessage);
     }
@@ -51,7 +51,7 @@ public class ObjectNotFoundException extends TkBaseException {
      * 
      * @param cause - cause of the exception.
      */
-    public ObjectNotFoundException(Throwable cause) {
+    public ObjectNotFoundException(final Throwable cause) {
 
         super(CODE, MESSAGE, cause);
     }
@@ -62,7 +62,7 @@ public class ObjectNotFoundException extends TkBaseException {
      * @param subMessage - additional message.
      * @param cause - cause of the exception.
      */
-    public ObjectNotFoundException(String subMessage, Throwable cause) {
+    public ObjectNotFoundException(final String subMessage, final Throwable cause) {
 
         super(CODE, MESSAGE + ": " + subMessage, cause);
     }
