@@ -88,6 +88,6 @@ var owner = userRepository.findByUserId(request.getUserId())
 
 Константин Терских  
 Email: `kostus.online.1974@yandex.ru`, `kostus.online@gmail.com`  
-Санкт-Петербург
+Санкт-Петербург 2025-2026
 
 Англоязычная версия: [README.md](README.md).

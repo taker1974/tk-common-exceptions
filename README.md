@@ -88,6 +88,6 @@ This module is distributed under the Apache 2.0 license. See the LICENSE file fo
 
 Konstantin Terskikh  
 Email: `kostus.online.1974@yandex.ru`, `kostus.online@gmail.com`  
-Saint Petersburg
+Saint Petersburg 2025-2026
 
 Russian documentation: [README_ru.md](README_ru.md).

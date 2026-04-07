@@ -8,7 +8,7 @@
     <groupId>ru.spb.tksoft</groupId>
     <artifactId>tk-common-exceptions</artifactId>
     <name>tk-common-exceptions</name>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
     <description>Common Exceptions from TKSoft.</description>
 
     <url>http://tksoft.spb.ru</url>
@@ -36,29 +36,30 @@
     </scm>
 
     <properties>
-        <java.version>21</java.version>
+        <java.version>25</java.version>
 
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <lombok.version>1.18.42</lombok.version>
+        <lombok.version>1.18.44</lombok.version>
         <maven-javadoc.version>3.12.0</maven-javadoc.version>
-        <maven-compiler.version>3.14.1</maven-compiler.version>
-        <maven-jar.version>3.4.2</maven-jar.version>
-        <maven-source.version>3.3.1</maven-source.version>
-        <maven-surefire.version>3.5.4</maven-surefire.version>
+        <maven-compiler.version>3.15.0</maven-compiler.version>
+        <maven-jar.version>3.5.0</maven-jar.version>
+        <maven-source.version>3.4.0</maven-source.version>
+        <maven-surefire.version>3.5.5</maven-surefire.version>
         <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
 
-        <mockito.version>5.20.0</mockito.version>
-        <assertj.version>3.27.6</assertj.version>
-        <junit-jupiter.version>5.13.4</junit-jupiter.version>
-
-        <logback.version>1.5.18</logback.version>
+        <mockito.version>5.23.0</mockito.version>
+        <assertj.version>3.27.7</assertj.version>
+        <junit-jupiter.version>5.14.3</junit-jupiter.version>
 
         <slf4j.version>2.0.17</slf4j.version>
-        <tk-log-utils.version>2.0.6</tk-log-utils.version>
+        <logback.version>1.5.32</logback.version>
 
+        <tk-log-utils.version>2.0.7</tk-log-utils.version>
+
+        <central-publishing-maven-plugin.version>0.10.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -219,7 +220,7 @@
             <plugin>
                 <groupId>org.sonatype.central</groupId>
                 <artifactId>central-publishing-maven-plugin</artifactId>
-                <version>0.6.0</version>
+                <version>${central-publishing-maven-plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <autoPublish>true</autoPublish>
